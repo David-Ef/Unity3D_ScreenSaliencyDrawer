@@ -58,12 +58,20 @@ public class PostRenderSaliencyDrawer : MonoBehaviour
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
         RenderTexture rt1 = RenderTexture.GetTemporary(SaliencyMap.descriptor);
-        
+
         // Filter one way
         Graphics.Blit(fixMapTexture, rt1, gaussianFilterMaterial, 0);
-
         // Filter the other way
         Graphics.Blit(rt1, SaliencyMap, gaussianFilterMaterial, 1);
+        
+        // // Repeat filtering instead of using large in-shader filter
+        // for (int il = 0; il < 2; il++)
+        // {
+        //     // Filter one way
+        //     Graphics.Blit(SaliencyMap, rt1, gaussianFilterMaterial, 0);
+        //     // Filter the other way
+        //     Graphics.Blit(rt1, SaliencyMap, gaussianFilterMaterial, 1);
+        // }
         
         // Get max value in SaliencyMap
         RenderTexture oldRT = RenderTexture.active;
