@@ -7,3 +7,8 @@ A second script takes that 3D position and does the inverse projection and creat
 (the spheres should be hidden, they are here to demonstrate the process)
 
 ![example](example.png)
+
+***Blocky effect***
+
+If your viewport is large (e.g., 1920x1080) you may see weird blocky artifacts.
+To correct that, uncomment [this part](/Assets/Scripts/PostRenderSaliencyDrawer.cs#L67) and reduce the [KERNEL_SIZE here](/Assets/Shaders/SeparatedGaussianFilter.shader#L22). In addition to that you probably will need to reduce the "_Sigma" property in the editor > material [Generate2DSaliency](/Assets/Materials/Generate2DSaliency.mat).
